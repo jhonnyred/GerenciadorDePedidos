@@ -4,8 +4,16 @@ import json
 
 pedidos = dict()
 historico = dict()
+
 a = ' '
-b = 60 * a
+space = 60 * a
+
+def isfloat(num):
+    try:
+        float(num)
+        return True
+    except ValueError:
+        return False
 
 def uplo(arquivo, dicio):
     with open(arquivo, 'r') as file:
@@ -23,8 +31,8 @@ def pula_linha(a):
         print('\n')
         a = a - 1
 
-historico = uplo('historico.json', historico)
 pedidos = uplo('pedidos.json', pedidos)
+historico = uplo('historico.json', historico)
 
 
 while True:
@@ -41,78 +49,129 @@ while True:
     pedi['pagamento'] = None
 
     pula_linha(9)
-    w = input(b + '(1) Criar pedido\n' + b + '(2) Consultar pedido\n' + b + '(3) Consultar pedidos em andamento\n' + b + '(4) Remover pedido\n' + b + '(5) Concluir pedido\n' + b + '(6) Histórico\n' + b + '(Q) Sair\n' + b + '==>  ').upper()
+    w = input(space + '(1) Criar pedido\n' + space + '(2) Consultar pedido\n' + space + '(3) Consultar pedidos em andamento\n' + space + '(4) Remover pedido\n' + space + '(5) Concluir pedido\n' + space + '(6) Histórico\n' + space + '(Q) Sair\n' + space + '==>  ').upper()
     
 
     if w == '1':
 
         pula_linha(9)
-        pedi['numero'] = input(b +'NUMERO do pedido: ')
-        pedi['nome'] = input(b +'NOME do pedido: ').upper()
-        pedi['telefone'] = input(b +'TELEFONE do pedido: ')
-        pedi['pecas'] = input(b +'Número de PEÇAS: ')
-        pedi['descricao'] = input(b +'DESCRIÇÃO do pedido: ')
-        pedi['entrega'] = input(b +'ENTREGA do pedido: ')
-        pedi['unitario'] = input(b +'VALOR UNITARIO do pedido: ')
-        pedi['pagamento'] = input(b +'Qual a forma de PAGAMENTO: ')
+        pedi['numero'] = input(space +'NUMERO do pedido: ')
+        check = pedi['numero'].isdigit()
+        while not check:
+               pula_linha(9)
+               pedi['numero'] = input(space +'NUMERO inválido, digite novamente: ')
+               check = pedi['numero'].isdigit()
+        
+        pula_linha(9)
+        print(space +'NUMERO do pedido: ' +pedi['numero'])
+
+        pedi['nome'] = input(space +'NOME do pedido: ').upper()
+        pedi['telefone'] = input(space +'TELEFONE do pedido: ')
+        
+        pedi['pecas'] = input(space +'Número de PEÇAS: ')
+        check = pedi['pecas'].isdigit()
+        while not check:
+            pula_linha(9)
+            pedi['pecas'] = input(space +'Número de PEÇAS inválido, digite novamente usando somente números: ')
+            check = pedi['pecas'].isdigit()
+        
+        pula_linha(9)
+        print(space +'NUMERO do pedido: ' +pedi['numero'])
+
+        print(space +'NOME do pedido: ' +pedi['nome'])
+        print(space +'TELEFONE do pedido: ' +pedi['telefone'])
+
+        print(space +'Número de PEÇAS: ' +pedi['pecas'])
+        pedi['descricao'] = input(space +'DESCRIÇÃO do pedido: ') 
+
+        pedi['entrega'] = input(space +'ENTREGA do pedido: ')
+        
+        pedi['unitario'] = input(space +'VALOR UNITARIO do pedido: ')
+        check = isfloat(pedi['unitario'])
+        while not check:
+            pula_linha(9)
+            pedi['unitario'] = input(space +'Valor inválido, lembre-se de trocar vírgulas por pontos: ')
+            check = isfloat(pedi['unitario'])
+
+        pula_linha(9)
+        print(space +'NUMERO do pedido: ' +pedi['numero'])
+
+        print(space +'NOME do pedido: ' +pedi['nome'])
+        print(space +'TELEFONE do pedido: ' +pedi['telefone'])
+
+        print(space +'Número de PEÇAS: ' +pedi['pecas'])
+        print(space +'DESCRIÇÃO do pedido: ' +pedi['descricao'])
+
+        print(space +'ENTREGA do pedido: ' +pedi['entrega'])
+        print(space +'VALOR UNITÁRIO do pedido: ' +pedi['unitario'])
+        
+        pedi['pagamento'] = input(space +'Qual a forma de PAGAMENTO: ')
         pedi['data'] = datetime.datetime.now().strftime('%d/%m/%y')
+        
         pedi['total'] = float(pedi['unitario'])*int(pedi['pecas'])
         pedidos[pedi['numero']] = pedi
+        
         pula_linha(9)
         for k,v in pedi.items():
-                    print(b, k +': ' +str(v))
-        l = input('\n' + b + 'Aperte ENTER para voltar')
+                    print(space, k +': ' +str(v))
+        l = input('\n' + space + 'Aperte ENTER para voltar')
         down(pedidos, 'pedidos.json')
     
 
     elif w == '2':
 
         pula_linha(10)
-        w = input(b +'NUMERO, NOME ou TELEFONE do pedido \n' + b + ' ==>  ').upper()
+        w = input(space +'NUMERO, NOME ou TELEFONE do pedido \n' + space + ' ==>  ').upper()
         pedi = dict()
         encon = False
         for key in pedidos:
             pedi = pedidos[key]
             if w in pedi.values():
+                pula_linha(9)
                 for k,v in pedi.items():
-                    print(b, k +': ' +str(v))
-                    encon = True
-            elif w not in pedi.values() and encon == False: 
-                pula_linha(10)  
-                print(b +'Não foi possível encontrar esse pedido, consulte os pedidos em andamento se necessário')
-                break
-        l = input('\n' + b + 'Aperte ENTER para voltar')
+                    print(space, k +': ' +str(v))
+                encon = True  
+        if encon == False:
+            print(space +'Não foi possível encontrar esse pedido, consulte os pedidos em andamento se necessário')
+        l = input('\n' + space + 'Aperte ENTER para voltar')
 
 
 
     elif w == '3':
 
         pula_linha(0)
+        print(space +'Numero | Nome | Telefone | Descrição')
+        print(space +'________________________________________________')
         for key in pedidos:
             pedi = pedidos[key]
-            print(pedi)
-            print('\n')
-        l = input('\n  Aperte ENTER para voltar')
+            print(space +pedi['numero'] +'   ' +pedi['nome'] +'   ' +pedi['telefone'] +'   ' +pedi['descricao'])
+            print(space +'________________________________________________')
+        l = input('\n' +space +'Aperte ENTER para voltar')
 
     elif w == '4':
 
         pula_linha(10)
-        w = input(b+'NUMERO do pedido que deseja remover \n' + b + ' ==>  ').upper()
-        del pedidos[w]
+        w = input(space+'NUMERO do pedido que deseja remover \n' + space + ' ==>  ').upper()
+        try:
+            del pedidos[w]
+            down(pedidos, 'pedidos.json')
+        except:
+            print(space +'Número invalido')
+            l = input('\n' +space  +'Aperte ENTER para voltar')
 
 
     elif w == '5':
 
         pula_linha(10)
-        w = input(b +'NUMERO do pedido concluído \n' +b +' ==>  ').upper()
+        w = input(space +'NUMERO do pedido concluído \n' +space +' ==>  ').upper()
         try:
             historico[w] = pedidos[w]
             del pedidos[w]
-            l = input('\n' +b  +'Aperte ENTER para voltar')
+            l = input('\n' +space  +'Aperte ENTER para voltar')
             down(historico, 'historico.json')
         except:
-            print(b +'Número invalido')
-            l = input('\n' +b  +'Aperte ENTER para voltar')
+            print(space +'Número invalido')
+            l = input('\n' +space  +'Aperte ENTER para voltar')
 
 
     elif w == '6':
