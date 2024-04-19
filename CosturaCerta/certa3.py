@@ -45,14 +45,18 @@ def down(dicio, arquivo):
         json.dump(dicio, file)
     return dicio
 
-def downtxt(arquivo, variavel):
-    with open(arquivo, 'r') as text_file:
-        alldata = 'R$' + str(variavel).replace('.', ',') + datetime.datetime.now().strftime('   %d/%m/%y  %H:%M\n')
-        for line in text_file:
-            alldata = alldata + line
+def downtxt(arquivo, variavel, status, pagamento):
+        with open(arquivo, 'r') as text_file:
+            if status == 'entrada':
+                alldata = 'R$' + str(variavel).replace('.', ',') + pagamento + datetime.datetime.now().strftime('   %d/%m/%y  %H:%M ') + 'ENTRADA\n'        
+            else:
+                alldata = 'R$' + str(variavel).replace('.', ',') + pagamento + datetime.datetime.now().strftime('   %d/%m/%y  %H:%M ') + 'SAÍDA\n'        
+        
+            for line in text_file:
+                alldata = alldata + line
 
-        with open(arquivo, 'w') as text_file2:
-            text_file2.write(alldata)
+            with open(arquivo, 'w') as text_file2:
+                text_file2.write(alldata)
 
 
 # Atribuição dos dados contidos nos arquivos aos respectivos dicionários e variáveis (balanco é formatado para float)
@@ -79,7 +83,6 @@ while True:
     pedi['descricao'] = None
     pedi['data'] = None
     pedi['entrega'] = None
-    pedi['unitario'] = None
     pedi['total'] = 0
     pedi['pagamento'] = None
 
@@ -93,13 +96,21 @@ while True:
 
         pula_linha(9)
         entrada = input(space + 'R$ ').replace(',', '.')
-        balanco = balanco + float(entrada)
-        
-        #DOWNLOAD HIST. ENTRADAS
-        downtxt('entrada.txt', entrada)
+        pagamento = '  ' + input(space + 'Forma de pagamento: ')
 
-        #DOWNLOAD HIST. BALANÇO
-        downtxt('balanco.txt', balanco)
+        pula_linha(9)
+        print(space+ 'R$'+ entrada + pagamento + '\n' +space+ 'pressione E para confirmar ou Q para cancelar operação')
+        b = input('\n' +space+ '==> ').upper()
+
+        if b == 'E':
+            balanco = balanco + float(entrada)
+            #DOWNLOAD HIST. ENTRADAS
+            downtxt('entrada.txt', entrada, 'entrada', pagamento)
+
+            #DOWNLOAD HIST. BALANÇO
+            downtxt('balanco.txt', balanco, 'entrada', pagamento)
+        else:
+            continue
 
 
 # SAÍDAS
@@ -107,13 +118,21 @@ while True:
 
         pula_linha(9)
         saida = input(space + 'R$ ').replace(',', '.')
-        balanco = balanco - float(saida)
+        pagamento = '  ' + input(space + 'Forma de pagamento: ')
 
-        #DOWNLOAD HIST. SAÍDAS
-        downtxt('saida.txt', saida)
+        pula_linha(9)
+        print(space+ 'R$'+ saida + pagamento + '\n' +space+ 'pressione E para confirmar ou Q para cancelar operação')
+        b = input('\n' +space+ '==> ').upper()
 
-        #DOWNLOAD HIST. BALANCO
-        downtxt('balanco.txt', balanco)
+        if b == 'E':
+            balanco = balanco + float(saida) 
+            #DOWNLOAD HIST. SAÍDAS
+            downtxt('saida.txt', saida, 'saida', pagamento)
+
+            #DOWNLOAD HIST. BALANCO
+            downtxt('balanco.txt', balanco, 'saida', pagamento)
+        else:
+            continue
 
 
 # CRIAR PEDIDO
@@ -150,25 +169,6 @@ while True:
         pedi['descricao'] = input(space +'DESCRIÇÃO do pedido: ') 
 
         pedi['entrega'] = input(space +'DATA DE ENTREGA do pedido: ')
-        
-        pedi['unitario'] = input(space +'VALOR UNITARIO do pedido: ')
-        check = isfloat(pedi['unitario'])
-        while not check:
-            pula_linha(9)
-            pedi['unitario'] = input(space +'Valor inválido, lembre-se de trocar vírgulas por pontos: ')
-            check = isfloat(pedi['unitario'])
-
-        pula_linha(9)
-        print(space +'NUMERO do pedido: ' +pedi['numero'])
-
-        print(space +'NOME do pedido: ' +pedi['nome'])
-        print(space +'TELEFONE do pedido: ' +pedi['telefone'])
-
-        print(space +'Número de PEÇAS: ' +pedi['pecas'])
-        print(space +'DESCRIÇÃO do pedido: ' +pedi['descricao'])
-
-        print(space +'ENTREGA do pedido: ' +pedi['entrega'])
-        print(space +'VALOR UNITÁRIO do pedido: ' +pedi['unitario'])
         
         pedi['pagamento'] = input(space +'Qual a forma de PAGAMENTO: ')
         pedi['total'] = input(space + 'VALOR TOTAL do pedido: ')
