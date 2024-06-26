@@ -1,8 +1,9 @@
 import datetime
 import os
+import platform
 import json
 
-# Abre 2 dicionários e 3 variáveis, aqui é onde estão armazenados todos os dicionários (pedidos para aqueles pedidos que não foram concluidos e historico para aqueles ja concluidos)
+# Inicialização dos dicionários
 pedidos = dict()
 historico = dict()
 balanco = str()
@@ -10,20 +11,22 @@ entrada = str()
 saida = str()
 
 
-# Variáveis que possuem strings atribuidas para ajudar na formatação do menu
-a = ' '
-space = 60 * a
+# Eixo Y (Y axis)
+Yaxis = 60 * ' '
 
 
-# Função necessária para a formatação do menu
-def pula_linha(a):
-    os.system('cls')
-    while a != 0:
+# Eixo X (X axis)
+def Xaxis(numero):
+    if platform.system() == 'Windows':
+        os.system('cls')
+    else:
+        os.system('clear')
+
+    for i in range(numero):
         print('\n')
-        a = a - 1
+        numero -= 1
 
 
-# Aparentemente uma função dedicada a indentificar dados em formato float
 def isfloat(num):
     try:
         float(num)
@@ -32,19 +35,21 @@ def isfloat(num):
         return False
 
 
-# Função para faciltiar o upload de arquivos
+#  Upload JSON
 def uplo(arquivo, dicio):
     with open(arquivo, 'r') as file:
         dicio = json.load(file)
     return dicio
 
 
-# Funções para facilitar o download de arquivos
+# Download JSON
 def down(dicio, arquivo):
     with open(arquivo, 'w') as file:
         json.dump(dicio, file)
     return dicio
 
+
+# Download TXT
 def downtxt(arquivo, variavel, status, pagamento):
         with open(arquivo, 'r') as text_file:
             if status == 'entrada':
@@ -59,7 +64,7 @@ def downtxt(arquivo, variavel, status, pagamento):
                 text_file2.write(alldata)
 
 
-# Atribuição dos dados contidos nos arquivos aos respectivos dicionários e variáveis (balanco é formatado para float)
+# Tranferência de dados para os dicionários
 pedidos = uplo('pedidos.json', pedidos)
 historico = uplo('historico.json', historico)
 with open('balanco.txt', 'r') as file:
@@ -88,19 +93,19 @@ while True:
 
 
 # MENU
-    pula_linha(5)
-    w = input(space+ 'Balanço de caixa: ' + str(balanco) + '\n\n\n' + space+ 'CAIXA\n\n' + space+ '(E) Entradas\n' + space+ '(S) Saídas\n\n' + space+ 'GERENCIAMENTO DE PEDIDO\n\n' + space+ '(1) Criar pedido\n' + space+ '(2) Editar pedido\n' + space+ '(3) Consultar pedido\n' + space+ '(4) Consultar pedidos em andamento\n' + space+ '(5) Remover pedido\n' + space+ '(6) Concluir pedido\n\n' + space+ 'HISTÓRICOS\n\n' + space+ '(7) Pedidos\n'+ space+'(8) Entradas\n'+ space+ '(9) Saídas\n' + space+ '(0) Balanço\n\n' + space+ '(Q) Sair\n' + space+ '==>  ').upper()
+    Xaxis(5)
+    w = input(Yaxis+ 'Balanço de caixa: ' + str(balanco) + '\n\n\n' + Yaxis+ 'CAIXA\n\n' + Yaxis+ '(E) Entradas\n' + Yaxis+ '(S) Saídas\n\n' + Yaxis+ 'GERENCIAMENTO DE PEDIDO\n\n' + Yaxis+ '(1) Criar pedido\n' + Yaxis+ '(2) Editar pedido\n' + Yaxis+ '(3) Consultar pedido\n' + Yaxis+ '(4) Consultar pedidos em andamento\n' + Yaxis+ '(5) Remover pedido\n' + Yaxis+ '(6) Concluir pedido\n\n' + Yaxis+ 'HISTÓRICOS\n\n' + Yaxis+ '(7) Pedidos\n'+ Yaxis+'(8) Entradas\n'+ Yaxis+ '(9) Saídas\n' + Yaxis+ '(0) Balanço\n\n' + Yaxis+ '(Q) Sair\n' + Yaxis+ '==>  ').upper()
 
 # ENTRADAS
     if w == 'E':
 
-        pula_linha(9)
-        entrada = input(space + 'R$ ').replace(',', '.')
-        pagamento = '  ' + input(space + 'Forma de pagamento: ')
+        Xaxis(9)
+        entrada = input(Yaxis + 'R$ ').replace(',', '.')
+        pagamento = '  ' + input(Yaxis + 'Forma de pagamento: ')
 
-        pula_linha(9)
-        print(space+ 'R$'+ entrada + pagamento + '\n' +space+ 'pressione E para confirmar ou Q para cancelar operação')
-        b = input('\n' +space+ '==> ').upper()
+        Xaxis(9)
+        print(Yaxis+ 'R$'+ entrada + pagamento + '\n' +Yaxis+ 'pressione E para confirmar ou Q para cancelar operação')
+        b = input('\n' +Yaxis+ '==> ').upper()
 
         if b == 'E':
             balanco = balanco + float(entrada)
@@ -116,13 +121,13 @@ while True:
 # SAÍDAS
     elif w == 'S':
 
-        pula_linha(9)
-        saida = input(space + 'R$ ').replace(',', '.')
-        pagamento = '  ' + input(space + 'Forma de pagamento: ')
+        Xaxis(9)
+        saida = input(Yaxis + 'R$ ').replace(',', '.')
+        pagamento = '  ' + input(Yaxis + 'Forma de pagamento: ')
 
-        pula_linha(9)
-        print(space+ 'R$'+ saida + pagamento + '\n' +space+ 'pressione E para confirmar ou Q para cancelar operação')
-        b = input('\n' +space+ '==> ').upper()
+        Xaxis(9)
+        print(Yaxis+ 'R$'+ saida + pagamento + '\n' +Yaxis+ 'pressione E para confirmar ou Q para cancelar operação')
+        b = input('\n' +Yaxis+ '==> ').upper()
 
         if b == 'E':
             balanco = balanco + float(saida) 
@@ -138,56 +143,56 @@ while True:
 # CRIAR PEDIDO
     elif w == '1':
 
-        pula_linha(9)
-        pedi['numero'] = input(space +'NUMERO do pedido: ')
+        Xaxis(9)
+        pedi['numero'] = input(Yaxis +'NUMERO do pedido: ')
         check = pedi['numero'].isdigit()
         while not check:
-               pula_linha(9)
-               pedi['numero'] = input(space +'NUMERO inválido, digite novamente: ')
+               Xaxis(9)
+               pedi['numero'] = input(Yaxis +'NUMERO inválido, digite novamente: ')
                check = pedi['numero'].isdigit()
         
-        pula_linha(9)
-        print(space +'NUMERO do pedido: ' +pedi['numero'])
+        Xaxis(9)
+        print(Yaxis +'NUMERO do pedido: ' +pedi['numero'])
 
-        pedi['nome'] = input(space +'NOME do pedido: ').upper()
-        pedi['telefone'] = input(space +'TELEFONE do pedido: ')
+        pedi['nome'] = input(Yaxis +'NOME do pedido: ').upper()
+        pedi['telefone'] = input(Yaxis +'TELEFONE do pedido: ')
         
-        pedi['pecas'] = input(space +'Número de PEÇAS: ')
+        pedi['pecas'] = input(Yaxis +'Número de PEÇAS: ')
         check = pedi['pecas'].isdigit()
         while not check:
-            pula_linha(9)
-            pedi['pecas'] = input(space +'Número de PEÇAS inválido, digite novamente usando somente números inteiros: ')
+            Xaxis(9)
+            pedi['pecas'] = input(Yaxis +'Número de PEÇAS inválido, digite novamente usando somente números inteiros: ')
             check = pedi['pecas'].isdigit()
         
-        pula_linha(9)
-        print(space +'NUMERO do pedido: ' +pedi['numero'])
+        Xaxis(9)
+        print(Yaxis +'NUMERO do pedido: ' +pedi['numero'])
 
-        print(space +'NOME do pedido: ' +pedi['nome'])
-        print(space +'TELEFONE do pedido: ' +pedi['telefone'])
+        print(Yaxis +'NOME do pedido: ' +pedi['nome'])
+        print(Yaxis +'TELEFONE do pedido: ' +pedi['telefone'])
 
-        print(space +'Número de PEÇAS: ' +pedi['pecas'])
-        pedi['descricao'] = input(space +'DESCRIÇÃO do pedido: ') 
+        print(Yaxis +'Número de PEÇAS: ' +pedi['pecas'])
+        pedi['descricao'] = input(Yaxis +'DESCRIÇÃO do pedido: ') 
 
-        pedi['entrega'] = input(space +'DATA DE ENTREGA do pedido: ')
+        pedi['entrega'] = input(Yaxis +'DATA DE ENTREGA do pedido: ')
         
-        pedi['pagamento'] = input(space +'Qual a forma de PAGAMENTO: ')
-        pedi['total'] = input(space + 'VALOR TOTAL do pedido: ')
+        pedi['pagamento'] = input(Yaxis +'Qual a forma de PAGAMENTO: ')
+        pedi['total'] = input(Yaxis + 'VALOR TOTAL do pedido: ')
         pedi['data'] = datetime.datetime.now().strftime('%d/%m/%y')
         
         pedidos[pedi['numero']] = pedi
         
-        pula_linha(9)
+        Xaxis(9)
         for k,v in pedi.items():
-                    print(space, k +': ' +str(v))
-        l = input('\n' + space + 'Pressione ENTER para salvar e voltar')
+                    print(Yaxis, k +': ' +str(v))
+        l = input('\n' + Yaxis + 'Pressione ENTER para salvar e voltar')
         down(pedidos, 'pedidos.json')
 
 
 # EDITAR PEDIDO
     elif w == '2':
 
-        pula_linha(10)
-        w = input(space +'Digite o NUMERO do pedido que deseja editar \n' +space +' ==>  ')
+        Xaxis(10)
+        w = input(Yaxis +'Digite o NUMERO do pedido que deseja editar \n' +Yaxis +' ==>  ')
         
         if w in pedidos:
             pedi = pedidos[w].copy()
@@ -196,24 +201,24 @@ while True:
             
             done = False
             while done == False:
-                pula_linha(8)
-                print(space +'MENU EDIÇÃO')
-                print(space +'(salve as alterações antes de sair do menu edição)\n')
+                Xaxis(8)
+                print(Yaxis +'MENU EDIÇÃO')
+                print(Yaxis +'(salve as alterações antes de sair do menu edição)\n')
                 pedi['nome'] = pedi['nome'].upper()
                 for key, value in pedi.items():
-                    print(space + key +':', pedi[key])
-                print('\n' +space +'[S] salvar [Q] sair')
-                b = input(space +'Digite o item a ser editado \n' +space +' ==>  ').lower()
+                    print(Yaxis + key +':', pedi[key])
+                print('\n' +Yaxis +'[S] salvar [Q] sair')
+                b = input(Yaxis +'Digite o item a ser editado \n' +Yaxis +' ==>  ').lower()
 
                 if b == 'numero':
-                    pula_linha(10)
-                    print(space +'Não é possível alterar o número do pedido, se necessário crie outro pedido\n')
-                    b = input(space +'Pressione ENTER para continuar')
+                    Xaxis(10)
+                    print(Yaxis +'Não é possível alterar o número do pedido, se necessário crie outro pedido\n')
+                    b = input(Yaxis +'Pressione ENTER para continuar')
                 
                 #SAVE
                 elif b == 's':
                     pedidos[w] = pedi
-                    b = input(space +'Salvo!\n' +space +'Pressione ENTER para continuar')
+                    b = input(Yaxis +'Salvo!\n' +Yaxis +'Pressione ENTER para continuar')
                     down(pedidos, 'pedidos.json')
 
                 #QUIT
@@ -223,94 +228,94 @@ while True:
                 
                 #ALTERA
                 elif b != 'q' or b != 's':
-                    pula_linha(10)
+                    Xaxis(10)
                     if b in pedi:
-                        print(f'{space}{b}: {pedi[b]}\n')
-                        pedi[b] = input(space +' ==>  ').replace(',', '.')
+                        print(f'{Yaxis}{b}: {pedi[b]}\n')
+                        pedi[b] = input(Yaxis +' ==>  ').replace(',', '.')
 
                     else:
-                        print(space +'Não foi possível encontrar este item\n')
-                        b = input(space +'Pressione ENTER para voltar ao menu edição')
+                        print(Yaxis +'Não foi possível encontrar este item\n')
+                        b = input(Yaxis +'Pressione ENTER para voltar ao menu edição')
         
         else:
-            print(space +'Não foi possível localizar o pedido\n')
-            w = input(space +'Pressione ENTER para voltar')
+            print(Yaxis +'Não foi possível localizar o pedido\n')
+            w = input(Yaxis +'Pressione ENTER para voltar')
 
 # LOCALIZAR PEDIDO
     elif w == '3':
 
-        pula_linha(10)
-        w = input(space +'NUMERO, NOME ou TELEFONE do pedido \n' + space + ' ==>  ').upper()
+        Xaxis(10)
+        w = input(Yaxis +'NUMERO, NOME ou TELEFONE do pedido \n' + Yaxis + ' ==>  ').upper()
         pedi = dict()
         encon = False
         
         for nume, info in pedidos.items():
             if w == nume:
-                pula_linha(9)
+                Xaxis(9)
                 for k in info:
-                    print(space, k  +':', info[k])
+                    print(Yaxis, k  +':', info[k])
                 encon = True
             elif w == info['nome']:
-                pula_linha(9)
+                Xaxis(9)
                 for k in info:
-                    print(space, k +':', info[k])
+                    print(Yaxis, k +':', info[k])
                 encon = True
             elif w == info['telefone']:
-                pula_linha(9)
+                Xaxis(9)
                 for k in info:
-                    print(space, k +':', info[k])
+                    print(Yaxis, k +':', info[k])
                 encon = True 
         
         if encon == False:
-            print(space +'Não foi possível encontrar esse pedido, consulte os pedidos em andamento se necessário')
-        l = input('\n' + space + 'Pressione ENTER para voltar')
+            print(Yaxis +'Não foi possível encontrar esse pedido, consulte os pedidos em andamento se necessário')
+        l = input('\n' + Yaxis + 'Pressione ENTER para voltar')
 
 
 # PEDIDOS EM ANDAMENTO
     elif w == '4':
 
-        pula_linha(0)
-        print(space +'Numero | Nome | Telefone | Descrição')
-        print(space +'________________________________________________')
+        Xaxis(0)
+        print(Yaxis +'Numero | Nome | Telefone | Descrição')
+        print(Yaxis +'________________________________________________')
         for key in pedidos:
             pedi = pedidos[key]
-            print(space +pedi['numero'] +'   ' +pedi['nome'] +'   ' +pedi['telefone'] +'   ' +pedi['descricao'])
-            print(space +'________________________________________________')
-        l = input('\n' +space +'Pressione ENTER para voltar')
+            print(Yaxis +pedi['numero'] +'   ' +pedi['nome'] +'   ' +pedi['telefone'] +'   ' +pedi['descricao'])
+            print(Yaxis +'________________________________________________')
+        l = input('\n' +Yaxis +'Pressione ENTER para voltar')
 
 
 # REMOVER PEDIDO
     elif w == '5':
 
-        pula_linha(10)
-        w = input(space+'NUMERO do pedido que deseja remover \n' + space + ' ==>  ').upper()
+        Xaxis(10)
+        w = input(Yaxis+'NUMERO do pedido que deseja remover \n' + Yaxis + ' ==>  ').upper()
         try:
             del pedidos[w]
             down(pedidos, 'pedidos.json')
         except:
-            print(space +'Número invalido')
-            l = input('\n' +space  +'Pressione ENTER para voltar')
+            print(Yaxis +'Número invalido')
+            l = input('\n' +Yaxis  +'Pressione ENTER para voltar')
 
 
 # CONCLUSÃO DE PEDIDO
     elif w == '6':
 
-        pula_linha(10)
-        w = input(space +'NUMERO do pedido concluído \n' +space +' ==>  ').upper()
+        Xaxis(10)
+        w = input(Yaxis +'NUMERO do pedido concluído \n' +Yaxis +' ==>  ').upper()
         try:
             historico[w] = pedidos[w]
             del pedidos[w]
-            l = input('\n' +space  +'Pressione ENTER para voltar')
+            l = input('\n' +Yaxis  +'Pressione ENTER para voltar')
             down(historico, 'historico.json')
         except:
-            print(space +'Número invalido')
-            l = input('\n' +space  +'Pressione ENTER para voltar')
+            print(Yaxis +'Número invalido')
+            l = input('\n' +Yaxis  +'Pressione ENTER para voltar')
 
 
 # EXIBIÇÃO DO HISTÓRICO
     elif w == '7':
 
-        pula_linha(0)
+        Xaxis(0)
         for key in historico:
             pedi = historico[key]
             print(pedi)
@@ -321,33 +326,33 @@ while True:
 # HISTORICO ENTRADAS
     elif w == '8':
 
-        pula_linha(0)
+        Xaxis(0)
         with open('entrada.txt', 'r') as file:
             for line in file:
-                print(space + line)
+                print(Yaxis + line)
 
-        enter = input('\n' +space+ 'Pressione ENTER para voltar')
+        enter = input('\n' +Yaxis+ 'Pressione ENTER para voltar')
 
 
 #HISTORICO SAIDAS
     elif w == '9':
 
-        pula_linha(0)
+        Xaxis(0)
         with open('saida.txt', 'r') as file:
             for line in file:
-                print(space + line)
+                print(Yaxis + line)
         
-        enter = input('\n' +space+ 'Pressione ENTER para voltar')
+        enter = input('\n' +Yaxis+ 'Pressione ENTER para voltar')
 
 #HISTORICO BALANÇO
     elif w == '0':
 
-        pula_linha(0)
+        Xaxis(0)
         with open('balanco.txt', 'r') as file:
             for line in file:
-                print(space + line)
+                print(Yaxis + line)
 
-        enter = input('\n' +space+ 'Pressione ENTER para voltar')
+        enter = input('\n' +Yaxis+ 'Pressione ENTER para voltar')
 
 
 # FECHAR PROGRAMA
