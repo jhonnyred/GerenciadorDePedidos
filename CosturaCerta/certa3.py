@@ -79,7 +79,7 @@ with open('balanco.txt', 'r') as file:
 # Main
 while True:
 
-    #Um novo dicionário molde para criação ou edição de pedidos
+    #Dicionário molde
     pedi = dict()
     pedi['numero'] = None
     pedi['nome'] = None
