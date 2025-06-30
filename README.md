@@ -16,7 +16,7 @@ This system consist basically on the orders, so it's order centered, but the fin
 ### CAIXA (cashier)
 On this section you have 2 options (E)Entradas (entries) and (S)Saidas (exits), pressing E or S will direct you to a screen where you can type the value in reais.
 ### GERENCIAMENTO DE PEDIDO (order management)
-On this section are all the needed operations to manage a order, you can (1)create, (2)edit, (3)consult order, (4)consult on going orders, (5)remove order and (6)conclude an order.
+On this section are all the needed operations to manage an order, you can (1)create, (2)edit, (3)consult order, (4)consult on going orders, (5)remove order and (6)conclude an order.
 #### Creating an order
 To create an order it's very simple, on the main menu you just press `1` and press `ENTER`, after that you are already describing the order to the system, you will describe the following informations respectively:
 * NUMERO (order number) 
