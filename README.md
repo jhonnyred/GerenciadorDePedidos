@@ -1,9 +1,9 @@
-# Gerenciador de Pedido 
-## (order manager)
+# Gerenciador de Pedido (order manager)
+ 🐍 python project
 
-## 🐍 python project
+## Description
+This is a CLI (Command Line Interface) order manager for local stores wich stores the information locally, this application it's intended to help small shop owners organize their customers and financial data. It was programmed in procedural method, so if you are willing to modify this code for your usage, be ready. By now there is no classes, only functions, all code is contained in one file called `certa3.py`. If you, somehow, ended up on this repository and are interested on helping this project, feel free to contribute with the idea, I use this repository for studying, but more importantly for small shop owners, I know this isn't enough for them right now, but as soon as I work on some updates I expect to make an application that really can help small shops manage their orders.
 
-### This repository contains all files needed for the aplication to run.
 ## ⬇️ Installing
 It's very simple, you just need to download this repository, after unzipping the folder you can just open the certa3.exe and the application should run correctly.
 
@@ -34,10 +34,6 @@ After creating your order you can consult it, it will search by the order number
 It's so simple as creating an order, you press `6` and then press `ENTER`, you must write the number of the order you want to conclude and press `ENTER` again. All the concluded order will be displayed on the (7)Pedidos option on the HISTORICO section.
 ### HISTORICO (history)
 On this section you have all the history of your system you can access (7)Pedidos (orders) for orders history, (8)Entradas (entries) for entries history, (9)Saídas (exits for exits history and (0)Balanço (balanace) for balance history.
-
-
-## Description
-This is a CLI (Command Line Interface) order manager for local stores wich stores the information locally, this application it's intended to help small shop owners organize their customers and financial data. It was programmed in procedural method, so if you are willing to modify this code for your usage, be ready. By now there is no classes, only functions, all code is contained in one file called `certa3.py`. If you, somehow, ended up on this repository and are interested on helping this project, feel free to contribute with the idea, I use this repository for studying, but more importantly for small shop owners, I know this isn't enough for them right now, but as soon as I work on some updates I expect to make an application that really can help small shops manage their orders.
 
 ## Documentation
 Most of this code is programmed in portuguese, below are some important translation and all the description needed to comprehend the application's files.
