@@ -33,7 +33,7 @@ After creating your order you can consult it, it will search by the order number
 #### Concluding an order
 It's so simple as creating an order, you press `6` and then press `ENTER`, you must write the number of the order you want to conclude and press `ENTER` again. All the concluded order will be displayed on the (7)Pedidos option on the HISTORICO section.
 ### HISTORICO (history)
-On this section you have all the history of your system you can access (7)Pedidos (orders, for orders history), (8)Entradas (entries, for entries history), (9)Saídas (exits, for exits history) and (0)Balanço (balanace, for balance history).
+On this section you have all the history of your system you can access (7)Pedidos (orders) for orders history, (8)Entradas (entries) for entries history, (9)Saídas (exits for exits history and (0)Balanço (balanace) for balance history.
 
 
 ## Description
