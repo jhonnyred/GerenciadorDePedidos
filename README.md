@@ -35,6 +35,11 @@ It's so simple as creating an order, you press `6` and then press `ENTER`, you m
 ### HISTORICO (history)
 On this section you have all the history of your system you can access (7)Pedidos (orders) for orders history, (8)Entradas (entries) for entries history, (9)Saídas (exits for exits history and (0)Balanço (balanace) for balance history.
 
+## 📣 On Coming 
+### Major update
+* Changing to local web application
+* probally changing script to an OOP method
+
 ## Documentation
 Most of this code is programmed in portuguese, below are some important translation and all the description needed to comprehend the application's files.
 #### 📄 Files
@@ -55,11 +60,6 @@ This `JSON` it's the main data structure for the system, delete or wipe it out c
 This `JSON` just like `pedidos.json` contains crucial information for the system, just like `pedidos.json` if this archive is wiped out or deleted, your application won't work. Here are conteined all the CONCLUDED orders.
 #### certa3.py
 Here are all the scripts for the system to work, this is a procedural script so all it's functionality is contained below the `# Main` commentary, the scripts basically upgrade those JSONs files before the user input (if you application open but closes instantly, probally this is where it's is failing, if the system can't read any information contained on those JSONs files so it can't start, I will fix it), after that the system is a `while` loop until you type `Q` and press `ENTER`.
-
-## 📣 On Coming 
-### Major update
-* Changing to local web application
-* probally changing script to an OOP method
 
 
 
