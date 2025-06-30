@@ -2,7 +2,8 @@
  🐍 python project
 
 ## Description
-This is a CLI (Command Line Interface) order manager for local stores wich stores the information locally, this application it's intended to help small shop owners organize their customers and financial data. It was programmed in procedural method, so if you are willing to modify this code for your usage, be ready. By now there is no classes, only functions, all code is contained in one file called `certa3.py`. If you, somehow, ended up on this repository and are interested on helping this project, feel free to contribute with the idea, I use this repository for studying, but more importantly for small shop owners, I know this isn't enough for them right now, but as soon as I work on some updates I expect to make an application that really can help small shops manage their orders.
+This is a CLI (Command Line Interface) order manager for local stores wich stores the information locally, this application it's intended to help small shop owners organize their customers and financial data. It was programmed in procedural method, so if you are willing to modify this code for your usage, be ready. By now there is no classes, only functions, all code is contained in one file called `certa3.py`. If you, somehow, ended up on this repository and are interested on helping this project, feel free to contribute with the idea, I use this repository for studying, but more importantly for small shop owners, I know this isn't enough for them right now, but as soon as I work on some updates I expect to make an application that really can help small shops manage their orders. This repository is very important for me, it was my first project intended to be a real solution, it gave me a lot of insights and sure those codes are very basic and amateur, but it's not only about the code, but how I could help my mother with my knowledge.
+
 
 ## ⬇️ Installing
 It's very simple, you just need to download this repository, after unzipping the folder you can just open the certa3.exe and the application should run correctly.
@@ -60,8 +61,3 @@ This `JSON` it's the main data structure for the system, delete or wipe it out c
 This `JSON` just like `pedidos.json` contains crucial information for the system, just like `pedidos.json` if this archive is wiped out or deleted, your application won't work. Here are conteined all the CONCLUDED orders.
 #### certa3.py
 Here are all the scripts for the system to work, this is a procedural script so all it's functionality is contained below the `# Main` commentary, the scripts basically upgrade those JSONs files before the user input (if you application open but closes instantly, probally this is where it's is failing, if the system can't read any information contained on those JSONs files so it can't start, I will fix it), after that the system is a `while` loop until you type `Q` and press `ENTER`.
-
-
-
-
-This repository is very important for me, it was my first project intended to be a real solution, it gave me a lot of insights and sure those codes are very basic and amateur, but it's not only about the code, but how I could help my mother with my knowledge.
